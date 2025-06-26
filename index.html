@@ -1,21 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>スプレッドシート送信</title>
+</head>
 <body>
-  <input type="text" id="textInput" placeholder="書き込み内容">
+  <h1>データ送信フォーム</h1>
+
+  <input type="text" id="value1" placeholder="名前"><br>
+  <input type="text" id="value2" placeholder="相手"><br>
+  <input type="text" id="value3" placeholder="勝敗"><br>
+  <input type="text" id="value4" placeholder="時間"><br>
   <button onclick="sendData()">送信</button>
+
+  <p id="result"></p>
 
   <script>
     function sendData() {
-      const message = document.getElementById("textInput").value;
+      const value1 = document.getElementById("value1").value;
+      const value2 = document.getElementById("value2").value;
+      const value3 = document.getElementById("value3").value;
+      const value4 = document.getElementById("value4").value;
 
-      fetch("＜デプロイURL＞", {
+      fetch("https://script.google.com/macros/s/xxxxxxxxxxxxxxxxxxxxxxx/exec", { // ← ここにWebアプリのURLを貼る
         method: "POST",
-        body: JSON.stringify({ message: message }),
+        body: JSON.stringify({
+          value1,
+          value2,
+          value3,
+          value4
+        }),
         headers: { "Content-Type": "application/json" }
       })
-      .then(res => res.text())
-      .then(response => alert("スプレッドシートに書き込みました：" + response));
+      .then(response => response.text())
+      .then(text => {
+        document.getElementById("result").innerText = "送信結果: " + text;
+      })
+      .catch(err => {
+        document.getElementById("result").innerText = "エラー: " + err;
+      });
     }
   </script>
 </body>
 </html>
+
