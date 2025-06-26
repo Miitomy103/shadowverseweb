@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <input type="text" id="textInput" placeholder="書き込み内容">
+  <button onclick="sendData()">送信</button>
+
+  <script>
+    function sendData() {
+      const message = document.getElementById("textInput").value;
+
+      fetch("＜デプロイURL＞", {
+        method: "POST",
+        body: JSON.stringify({ message: message }),
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(res => res.text())
+      .then(response => alert("スプレッドシートに書き込みました：" + response));
+    }
+  </script>
+</body>
+</html>
