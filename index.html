@@ -24,14 +24,15 @@
       value4: document.getElementById("value4").value
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbwTpXQQ1W2B1r89EW1yeIMmBx4DoJBzWOYTK-nlP7LQDf8PTbQVh8Lkor0Ur99Croi5CA/exec", {
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain"
-      },
-      body: JSON.stringify(data),
-      mode: "cors"
-    })
+fetch("https://script.google.com/macros/s/AKfycbz3Asj96Zu3EwW4s97e7tllvrioMHlPMQxzmUIQPRxgEJCFqPHORpkVvdZXd656WF9SIQ/exec", {
+  method: "POST",
+  headers: {
+    "Content-Type": "text/plain"
+  },
+  body: JSON.stringify(data),
+  mode: "cors"
+})
+
     .then(response => response.text())
     .then(text => {
       document.getElementById("result").innerText = "送信結果: " + text;
